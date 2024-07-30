@@ -1183,8 +1183,11 @@ another_hunk (enum diff difftype, bool rev)
     while (p_end >= 0) {
 	if (p_end == p_efake)
 	    p_end = p_bfake;		/* don't free twice */
-	else
+	else {
 	    free(p_line[p_end]);
+	    p_line[p_end] = NULL;
+	    p_len[p_end] = 0;
+	}
 	p_end--;
     }
     assert(p_end == -1);
